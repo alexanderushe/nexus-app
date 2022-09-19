@@ -1,0 +1,76 @@
+<ion-content class="ion-padding">
+
+  <ion-avatar>
+    <ion-img src="assets/imgs/1.jpg"></ion-img>
+  </ion-avatar>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list lines="none">
+      <div class="ion-margin-bottom">
+        
+        <ion-item color="light" >
+          <ion-icon name="mail" slot="start" color="primary"></ion-icon> 
+          <ion-input
+            type="email"
+            name="email"
+            ngModel
+            email
+            #emailCtrl="ngModel"
+            placeholder="Email"
+            required>
+          </ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="!emailCtrl.valid && emailCtrl.touched" class="ion-text-center">
+          <p class="errorMsg">* Please enter a valid email address</p>
+        </ion-text>
+      </div>
+
+      <ion-item color="light">
+        <ion-icon name="key" slot="start" color="primary"></ion-icon> 
+        <ion-icon color="primary" slot="end" (click)="changeType()" [name]="type ? 'eye-outline' : 'eye-off-outline'"></ion-icon>
+        <ion-input
+          [type]="type ? 'password' : 'text'"
+          name="password"
+          ngModel
+          #passwordCtrl="ngModel"
+          placeholder="Password"
+          required
+          minlength="8">
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!passwordCtrl.valid && passwordCtrl.touched" class="ion-text-center">
+        <p class="errorMsg">* Password must be of minimum 8 characters long.</p>
+      </ion-text>
+    </ion-list>
+
+    <p class="ion-text-right">
+      <span  routerLink="/login/forgot-password">Forgot password?</span>
+      </p>
+
+    <ion-button 
+      *ngIf="!isLogin" 
+      [disabled]="!f.valid"
+      expand="block" 
+      shape="round" 
+      type="submit" 
+      color="primary">
+      SIGN IN
+    </ion-button>
+
+    <div class="ion-text-center" *ngIf="isLogin">
+      <ion-button 
+        shape="round" color="primary" [disabled]="!f.valid">
+        <ion-spinner name="circles"></ion-spinner>
+      </ion-button>
+    </div>
+    
+  </form>
+
+  <ion-text color="primary" class="ion-text-center" routerLink="/login/signup">
+    <p class="marginTop">
+      Don't have an account?
+      <b>Sign Up</b>
+    </p>
+  </ion-text>
+
+</ion-content>

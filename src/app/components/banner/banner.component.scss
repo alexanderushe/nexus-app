@@ -1,0 +1,16 @@
+//ion-slides replaced by .swiper, ion-slide .swiper-slide
+swiper{
+    --bullet-background: var(--ion-color-dark);
+    height: 30vh;
+    div{
+        height: 20vh;
+        width: 100%;
+        margin: auto;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 10px;
+    }
+
+}
+

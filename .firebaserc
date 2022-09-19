@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "nexus-379a8"
+  },
+  "targets": {
+    "nexus-379a8": {
+      "hosting": {
+        "app": [
+          "nexus-379a8"
+        ]
+      }
+    }
+  }
+}

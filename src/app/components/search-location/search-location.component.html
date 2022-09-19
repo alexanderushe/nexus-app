@@ -1,0 +1,81 @@
+<ion-header class="ion-no-border" *ngIf="!from || from !== 'home'">
+  <ion-toolbar color="light">
+    <ion-title mode="md" *ngIf="from === 'cart'">
+      <ion-label>Choose a delivery address</ion-label>
+    </ion-title>
+
+    <ion-buttons slot="start" *ngIf="from && from === 'select-place'">
+      <ion-button fill="clear" (click)="dismiss()">
+        <ion-icon name="arrow-back-outline" color="dark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+    <ion-searchbar 
+      *ngIf="!from || from === 'select-place'"
+      slot="start"
+      animated="true" 
+      debounce="800" 
+      #searchInput 
+      placeholder="Search for area, street..."
+      (ionChange)="onSearchChange($event)">
+    </ion-searchbar>
+    <ion-buttons slot="end" *ngIf="!from">
+      <ion-button fill="clear" color="dark" (click)="dismiss()">Cancel</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <ion-item (click)="getCurrentPosition()" *ngIf="!from || from !== 'cart'">
+    <ion-icon slot="start" name="locate-outline"></ion-icon>
+    <ion-label>
+      Current location
+      <p>Using GPS</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-list *ngIf="from && (!query || query?.length === 0)">
+
+    <ion-list-header *ngIf="from === 'select-place'">
+      <ion-text color="secondary"><h5>SAVED ADDRESS</h5></ion-text>
+    </ion-list-header>
+
+    <ion-item *ngIf="from === 'home'">
+      <ion-label>Select Delivery Address</ion-label>
+      <ion-button color="primary" fill="clear" size="small" slot="end" (click)="dismiss('select')">VIEW ALL</ion-button>
+    </ion-item>
+
+    <ion-item *ngFor="let savedPlace of savedPlaces" (click)="selectSavedPlace(savedPlace)">
+      <ion-icon name="location-outline" slot="start"></ion-icon>
+      <ion-label>
+        {{savedPlace?.title}}
+        <p>{{savedPlace?.address}}</p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngIf="from === 'home'" lines="none" (click)="dismiss('select')">
+      <ion-icon name="search-outline" color="primary" slot="start"></ion-icon>
+      <ion-text><h5>Enter Location Manually</h5></ion-text>
+    </ion-item>
+
+    <ion-item lines="none" *ngIf="from === 'cart' || from === 'select-place'" (click)="dismiss('add')">
+      <ion-icon slot="start" name="add" color="primary"></ion-icon>
+      <ion-text color="primary"><h5>ADD NEW ADDRESS</h5></ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="places?.length > 0 && query?.length > 0">
+    <ion-list-header>
+      <h5>SEARCH RESULTS</h5>
+    </ion-list-header>
+    <ion-item *ngFor="let place of places" (click)="choosePlace(place)">
+      <ion-icon slot="start" name="location-outline"></ion-icon>
+      <ion-label>
+        {{place?.title}}
+        <p>{{place?.address}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

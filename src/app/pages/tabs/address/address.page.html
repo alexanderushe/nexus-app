@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> 
+    <ion-label color="dark">MANAGE ADDRESSES</ion-label></ion-title>
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/tabs/account"></ion-back-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <div *ngIf="isLoading" class="ion-text-center alignSpinner">
+    <ion-spinner color="primary"></ion-spinner>
+  </div>
+
+  <app-empty-screen *ngIf="!isLoading && addresses?.length ===0" [model]="model"></app-empty-screen>
+
+<ion-list *ngIf="!isLoading && addresses?.length >0">
+  <ion-item-divider>SAVED ADDRESSES</ion-item-divider>
+  <ion-item-group class="ion-padding">
+    <ion-item lines="full" class="ion-no-padding" *ngFor="let address of addresses">
+      <ion-icon [name]="getIcon(address?.title)" slot="start" color="medium"></ion-icon>
+      <ion-label>
+        <ion-label class="ion-padding-bottom">{{address?.title}}</ion-label>
+        <ion-text color="medium" class="ion-text-justify">
+          <p class="ion-text-wrap">{{address?.house}} {{address?.landmark}} {{address?.address}} </p>
+        </ion-text>
+        <ion-row>
+          <ion-button fill="clear" color="primary" (click)="editAddress(address)">EDIT </ion-button>
+          <ion-button fill="clear" color="primary" (click)="deleteAddress(address)"> DELETE </ion-button>
+        </ion-row> 
+      </ion-label>
+    </ion-item>
+  </ion-item-group>
+</ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-button [routerLink]="['/','tabs','address','edit-address']"
+    fill="outline" color="success"expand="block" class="ion-margin-horizontal">NEW ADDRESS</ion-button>
+  </ion-toolbar>
+</ion-footer>

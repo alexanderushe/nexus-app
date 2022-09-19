@@ -1,0 +1,16 @@
+<ion-item >
+  <ion-text [color]="item?.veg ? 'success' : 'primary' ">
+    <span [class]="item?.veg ? 'dotStyle' : 'dotNonVeg' ">&#9679;</span>
+  </ion-text>
+  <ion-label class="ion-text-wrap">
+    {{item?.name}}
+  </ion-label>
+  <ion-row >
+    <ion-icon color="success" name="remove-outline" (click)="quantityMinus()"></ion-icon>
+    <ion-text class="ion-text-center quantity" color="success" >{{item?.quantity}}</ion-text>
+    <ion-icon color="success" name="add-outline" (click)="quantityPlus()"></ion-icon>
+  </ion-row>
+  <ion-text slot="end" color="dark" class="price ion-text-right">
+    ${{(item?.price * item.quantity) | number:'0.2-2' }}
+  </ion-text>
+</ion-item>

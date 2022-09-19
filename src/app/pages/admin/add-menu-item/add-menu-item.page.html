@@ -1,0 +1,138 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Menu Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form #f1="ngForm" (ngSubmit)="onSubmit(f1)">
+    
+    <ion-list lines="none">
+
+      <ion-item>
+        <ion-label>Select Restaurant</ion-label>
+        <ion-select
+          (ionChange)="changeRestaurant($event)"
+          interface="popover"
+          name="restaurant_id"
+          ngModel
+          #restaurant_id="ngModel"
+          required>
+          <ion-select-option *ngFor="let restaurant of restaurants" [value]="restaurant.uid">{{restaurant?.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!restaurant_id.valid && restaurant_id.touched" class="ion-text-center">
+        <p class="errorMsg">* Select Restaurant</p>
+      </ion-text>
+
+    
+      <div *ngIf="categories?.length > 0"> 
+        <ion-item>
+          <ion-label>Select Category</ion-label>
+          <ion-select
+            interface="popover"
+            name="category_id"
+            [(ngModel)]="category"
+            #category_id="ngModel"
+            required>
+            <ion-select-option *ngFor="let category of categories" [value]="category.id">{{category?.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-text color="danger" *ngIf="!category_id.valid && category_id.touched" class="ion-text-center">
+          <p class="errorMsg">* Select Category</p>
+        </ion-text>
+      </div>
+      
+      
+      <ion-item>
+        <ion-icon name="person" slot="start" color="primary"></ion-icon> 
+        <ion-input
+          type="text"
+          name="name"
+          ngModel
+          #name="ngModel"
+          placeholder="Name"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!name.valid && name.touched">
+        <p class="errorMsg">* Please enter your name</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-textarea
+          type="text"
+          name="description"
+          ngModel
+          #description="ngModel"
+          placeholder="Description">
+        </ion-textarea>
+      </ion-item> 
+
+      <ion-item>
+        <ion-icon name="cash-outline" slot="start" color="primary"></ion-icon> 
+        <ion-input
+          type="number"
+          name="price"
+          ngModel
+          #price="ngModel"
+          placeholder="Price"
+          required>
+        </ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="!price.valid && price.touched">
+        <p class="errorMsg">* Please enter the price</p>
+      </ion-text>
+
+      <ion-item>
+        <ion-label>Veg</ion-label>
+        <ion-toggle slot="end" name="veg" [(ngModel)]="veg"></ion-toggle>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Status</ion-label>
+        <ion-toggle slot="end" name="status" [(ngModel)]="status"></ion-toggle>
+      </ion-item>
+
+      <div class="itemImage" *ngIf="!image || image === ''" (click)="changeImage()">
+        <ion-icon name="cloud-upload-outline" color="primary"></ion-icon>
+        <p>Upload Item Image here</p>
+      </div>
+      
+      <input type="file" accept="image/jpeg" #filePicker (change)="onFileChosen($event)">
+      
+      <div
+        class="itemImage imageDiv" 
+        *ngIf="image && image !== ''" 
+        (click)="changeImage()">
+        <ion-img [src]="image"></ion-img>
+      </div>
+      
+    </ion-list>
+
+    <ion-button 
+      *ngIf="!isLoading" 
+      [disabled]="!f1.valid"
+      expand="block" 
+      shape="round" 
+      type="submit" 
+      color="primary">
+      Save
+    </ion-button>
+
+    <div class="ion-text-center" *ngIf="isLoading">
+      <ion-button 
+        shape="round" 
+        color="primary" 
+        [disabled]="!f1.valid">
+        <ion-spinner name="circles"></ion-spinner>
+      </ion-button>
+    </div>
+    
+  </form>
+
+</ion-content>

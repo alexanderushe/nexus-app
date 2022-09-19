@@ -1,0 +1,25 @@
+<ion-card-header *ngFor="let status of statuses">
+  <ion-card-subtitle >{{status.title}}</ion-card-subtitle>
+  <ion-card-title>{{status.description}}</ion-card-title>
+</ion-card-header>
+
+<ion-card-content>
+
+</ion-card-content>
+<ion-card-content >
+  <!-- Default Progressbar with 50 percent -->
+  <ion-row>
+    <ion-col>
+      <ion-progress-bar [value]="progress" class="bar1"  buffer="0.5"></ion-progress-bar>
+    </ion-col>
+      <ion-col>
+        <ion-progress-bar value="1" class="bar2"></ion-progress-bar>
+      </ion-col>
+      <ion-col>
+        <ion-progress-bar value="1" class="bar3"></ion-progress-bar>
+      </ion-col>
+      <ion-col>
+        <ion-progress-bar value="1" class="bar4"></ion-progress-bar>
+      </ion-col>
+  </ion-row>
+</ion-card-content>

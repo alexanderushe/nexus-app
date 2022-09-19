@@ -1,0 +1,37 @@
+ion-thumbnail{
+    height: 10vh;
+    width: 20vw;
+    img{
+        border-radius: 10px;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+ion-row{
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 2px;
+    padding: 0.3rem;
+}
+.quantity {
+    width: 2rem;
+}
+.add {
+    padding: 0 1.3rem;
+}
+ion-text{
+    font-size: 0.8rem; 
+}
+ion-label{
+    ion-text{
+        font-size: 0.9rem !important;
+        font-weight: bold;
+    }
+    p{
+        font-size: 0.8rem !important;
+    }
+    ion-text, p {
+        
+    max-width: 25vh !important;
+    }
+}

@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Admin Control Panel</ion-title>
+    <ion-buttons slot="end">
+    <ion-button fill="clear"(click)="logout()">
+      <ion-icon name="power-outline" color="white" slot="icon-only">
+    </ion-icon></ion-button>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button class="ion-margin" expand="block" color="primary" routerLink="/admin/add-banner">Create Banner</ion-button>
+  <ion-button class="ion-margin" expand="block" color="primary" routerLink="/admin/add-store">Create Supermarket</ion-button>
+  <ion-button class="ion-margin" expand="block" color="primary" routerLink="/admin/add-menu-item">Create Menu</ion-button>
+
+</ion-content>

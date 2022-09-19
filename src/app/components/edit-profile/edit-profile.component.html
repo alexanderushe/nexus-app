@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title color="dark">EDIT ACCOUNT</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list class="ion-padding-horizontal ion-margin-bottom"> 
+      <ion-item class="ion-margin-vertical">
+        <ion-label position="floating">PHONE NUMBER</ion-label>
+        <ion-input type="tel" minlength="10" maxlength="10" #phoneInput
+        required name="phone" [ngModel]="profile?.phone" #phone="ngModel"></ion-input>
+        <ion-icon *ngIf="phone.valid" name="checkmark-outline" slot="end" color="primary" ></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">EMAIL ADDRESS</ion-label>
+        <ion-input type="email" required name="email" [ngModel]="profile?.email" #email="ngModel"></ion-input>
+        <ion-icon *ngIf="email.valid" name="checkmark-outline" slot="end" color="primary"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding-horizontal ion-text-center">
+      <ion-button *ngIf="!isSubmitted" expand="block" type="submit" color="primary" [disabled]="!f.valid">UPDATE</ion-button>
+      <ion-button *ngIf="isSubmitted" color="primary" [disabled]="!f.valid">
+        <ion-spinner name="crescent"></ion-spinner>
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

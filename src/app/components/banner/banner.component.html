@@ -1,0 +1,8 @@
+<!-- home.page.html -->
+<div class="borderBottom" *ngIf="bannerImages.length > 0">
+  <swiper pager="true" [config]="slideOptions">
+    <ng-template swiperSlide  *ngFor="let image of bannerImages" (click)="goToRestaurant(image)">
+      <div [ngStyle]="{'background-image': 'url('+ image.banner +')'}"></div>
+    </ng-template>
+  </swiper>
+</div>

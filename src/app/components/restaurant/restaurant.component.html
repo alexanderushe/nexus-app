@@ -1,0 +1,27 @@
+
+
+<ion-item lines="none">
+<ion-thumbnail slot="start">
+  <img [src]="restaurant?.cover ? restaurant.cover : fallbackImage" (error)="onImgError($event)"/>
+</ion-thumbnail>
+<ion-label>
+  <h4>{{restaurant?.name}}</h4>
+  <ion-text color="medium">
+    <p class="pStyle">
+      {{getCuisine(restaurant?.cuisines)}}
+    </p>
+  </ion-text>
+  <span *ngIf="restaurant?.rating > 0">
+    <ion-icon name="star">
+    </ion-icon>
+    {{restaurant?.rating}} .
+  </span>
+  {{restaurant?.deliveryTime}} mins . ${{restaurant?.price}} 
+  <ion-text color="tertiary" *ngIf="restaurant?.distance && restaurant?.distance !== 0">
+    <p class="distance">{{restaurant?.distance | number: '0.0-2'}} kms away</p>
+  </ion-text>
+  <ion-text color="tertiary" *ngIf="restaurant?.distance === 0">
+    <p class="distance">Few steps away</p>
+  </ion-text>
+</ion-label>
+</ion-item>

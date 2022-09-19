@@ -1,0 +1,7 @@
+{
+  "name": "Nexus",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

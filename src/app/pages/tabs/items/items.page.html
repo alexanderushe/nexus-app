@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- <ion-title>items</ion-title> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<app-restaurant-detail [data]="data" [isLoading]="isLoading" ></app-restaurant-detail>
+
+<ion-row class="ion-padding veg borderBottomSmall">
+  <ion-item>
+    <ion-label>
+      <h4>Veg only</h4>
+    </ion-label>
+    <ion-toggle mode="md"color="success" (ionChange)="vegOnly($event)" [(ngModel)]="veg"></ion-toggle>
+  </ion-item>
+</ion-row>
+<!--skeleton loader for items page-->
+<app-loading-restaurant *ngIf="isLoading"></app-loading-restaurant>
+<app-empty-screen [model]="model" *ngIf="!isLoading && categories?.length === 0"></app-empty-screen>
+
+    <ion-list lines="none" *ngFor=" let category of categories">
+      <ion-list-header *ngIf="checkItemCategory(category.id)">
+        {{category?.name}}
+      </ion-list-header>
+      <ng-container *ngFor="let item of items; let i = index">
+        <app-item 
+        *ngIf="category.id === item.categoryId.id" [item]="item" [index]="i"
+        (add)="quantityPlus($event)" 
+        (minus)="quantityMinus($event)"></app-item>
+      </ng-container>
+    </ion-list>
+ 
+</ion-content>
+
+<ion-footer *ngIf=" cartData?.totalItem > 0 ">
+  <ion-toolbar color="success">
+
+      <ion-label color="white">
+        <h4 >{{cartData?.totalItem}} item: <span *ngIf="cartData?.totalItem > 1">s</span> | $ {{cartData?.totalPrice | number: '0.2-2'}}</h4>
+        <ion-text color=light>
+          <p>extra charges may apply</p>
+        </ion-text>
+      </ion-label>
+      <ion-button slot="end" fill="clear" color="white" (click)="viewCart()">
+        <ion-icon slot="end" name="basket-outline"> </ion-icon>
+        View Cart
+      </ion-button>
+        
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-title color="dark" (click)="searchLocation('select-place')">
+      <span *ngIf="location?.lat">{{location?.title}}</span>
+      <span *ngIf="!location || !location?.lat">Home</span>
+      <ion-icon color="dark" name="chevron-down-outline"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="isLoading"><ion-skeleton-text animated style="height: 25vh;"></ion-skeleton-text></div>
+  <app-loading-restaurant *ngIf="isLoading"></app-loading-restaurant>
+  
+  <app-banner *ngIf="!isLoading" [bannerImages]="banners" ></app-banner>
+
+  <ion-list *ngIf="!isLoading">
+    <ion-list-header class="ion-margin-bottom">
+      <ion-label>
+        <h4>Supermarkets Nearby</h4>
+        <p>Discover grocery stores near you</p>
+      </ion-label>
+    </ion-list-header>
+    <ion-text *ngIf="restaurants?.length === 0" color="danger" class="ion-text-center">
+      <p>No Restaurants found near you</p>
+    </ion-text>
+    <ion-item-group *ngIf="restaurants?.length > 0">
+      <app-restaurant 
+        *ngFor="let restaurant of restaurants" 
+        [restaurant]="restaurant"
+        [routerLink]="['/', 'tabs', 'restaurants', restaurant.uid]"></app-restaurant>
+    </ion-item-group>
+  </ion-list>
+
+</ion-content>
